@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EKSYAH.ID - Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<!--
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #368043;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            background-color: rgb(3, 100, 19);
+            margin-bottom: 20px;
+        }
+
+        .soal-container {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .soal-container h3 {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .pilihan label {
+            display: block;
+            margin-bottom: 8px;
+            padding: 10px;
+            background: #76a771;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .pilihan label:hover {
+            background: #e8f8f5;
+        }
+
+        .pilihan input {
+            margin-right: 10px;
+        }
+
+        /* Tombol Kirim */
+        .btn-kirim {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-kirim:hover {
+            background-color: #2ecc71;
+        }
+
+        .hasil-box {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+            /* Disembunyikan sampai tombol ditekan */
+        }
+
+        .lulus {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .gagal {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* CSS BARU: Desain untuk tombol kembali ke index.html */
+        .btn-kembali {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-kembali:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+/*<body>
+
+    <div class="container">
+        <h1>Kuis Ekonomi Syariah</h1>
+        <p>Jawablah 5 soal ini dengan benar kalau misal memang kamu menerapkan ekonomi syariah</p>
+
+        <div id="tempat-soal"></div>
+
+        <button class="btn-kirim" onclick="hitungNilai()">Kirim & Lihat Hasil</button>
+
+         Tempat hasil nilai dan tombol kembali akan dimunculkan 
+        <div id="tempat-hasil" class="hasil-box"></div>
+    </div>
+
+    <script>
+        const dataKuis = [
+            {
+                pertanyaan: "1. Dalam sistem ekonomi syariah, penambahan yang disyaratkan dalam transaksi pinjam-meminjam uang (bunga) dilarang keras. Istilah untuk ini adalah...",
+                pilihan: { A: "Gharar", B: "Maysir", C: "Riba", D: "Rahn" },
+                kunci: "C"
+            },
+            {
+                pertanyaan: "2. Akad kerja sama di mana satu pihak menyediakan 100% modal dan pihak lain mengelola usaha disebut...",
+                pilihan: { A: "Musyarakah", B: "Mudharabah", C: "Murabahah", D: "Ijarah" },
+                kunci: "B"
+            },
+            {
+                pertanyaan: "3. Unsur ketidakpastian atau ketidakjelasan dalam transaksi jual beli yang dilarang disebut...",
+                pilihan: { A: "Maysir", B: "Riba", C: "Tadlis", D: "Gharar" },
+                kunci: "D"
+            },
+            {
+                pertanyaan: "4. Jual beli di mana penjual menyebutkan harga beli dan margin keuntungan yang disepakati bersama disebut akad...",
+                pilihan: { A: "Murabahah", B: "Salam", C: "Istishna", D: "Wadiah" },
+                kunci: "A"
+            },
+            {
+                pertanyaan: "5. Asuransi syariah yang beroperasi dengan prinsip saling tolong-menolong dan menanggung risiko bersama dikenal dengan istilah...",
+                pilihan: { A: "Sukuk", B: "Takaful", C: "Wakaf", D: "Qardh" },
+                kunci: "B"
+            }
+        ];
+
+        const tempatSoal = document.getElementById("tempat-soal");
+        const tempatHasil = document.getElementById("tempat-hasil");
+
+        function tampilkanSoal() {
+            let susunanHTML = "";
+
+            dataKuis.forEach((item, index) => {
+                susunanHTML += `<div class="soal-container">`;
+                susunanHTML += `<h3>${item.pertanyaan}</h3>`;
+                susunanHTML += `<div class="pilihan">`;
+
+                for (let huruf in item.pilihan) {
+                    susunanHTML += `
+                        <label>
+                            <input type="radio" name="soal_${index}" value="${huruf}">
+                            <strong>${huruf}.</strong> ${item.pilihan[huruf]}
+                        </label>
+                    `;
+                }
+
+                susunanHTML += `</div></div>`;
+            });
+
+            tempatSoal.innerHTML = susunanHTML;
+        }
+
+        function hitungNilai() {
+            let nilai = 0;
+            let soalTerjawab = 0;
+
+            dataKuis.forEach((item, index) => {
+                let jawabanUser = document.querySelector(`input[name="soal_${index}"]:checked`);
+
+                if (jawabanUser) {
+                    soalTerjawab++;
+                    if (jawabanUser.value === item.kunci) {
+                        nilai += 20;
+                    }
+                }
+            });
+
+            if (soalTerjawab < dataKuis.length) {
+                alert("Harap isi semua soal sebelum mengirim jawaban.");
+                return;
+            }
+
+            tempatHasil.style.display = "block";
+
+            // HTML BARU: Menyiapkan tombol untuk kembali ke index.html
+            // Kode yang sudah diperbaiki:
+            let tombolKembali = `<br><br><a href="index.html" class="btn-kembali">Kembali ke Halaman Utama</a>`;
+
+            if (nilai >= 80) {
+                tempatHasil.className = "hasil-box lulus";
+                tempatHasil.innerHTML = `<h2>Skor Anda: ${nilai} / 100</h2><p>Selamat, Anda berhasil!</p>` + tombolKembali;
+            } else if (nilai >= 60) {
+                tempatHasil.className = "hasil-box lulus";
+                tempatHasil.innerHTML = `<h2>Skor Anda: ${nilai} / 100</h2><p>Hampir berhasil!</p>` + tombolKembali;
+            } else {
+                tempatHasil.className = "hasil-box gagal";
+                tempatHasil.innerHTML = `<h2>Skor Anda: ${nilai} / 100</h2><p>Anda gagal. Silahkan coba lagi nanti!</p>` + tombolKembali;
+            }
+
+            tempatHasil.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        tampilkanSoal();
+    </script>
+</body>
+-->
+
+<body>
+
+    <header class="navbar">
+        <img src="EKSYAH-LOGO.png" alt="logo-eksyah" class="logo-ngiri">
+        <h2 class="headline" style="text-decoration: none;">EKSYAH.ID</h2>
+        <div>
+
+            <img src="smaridasa.png" alt="SMAN 10 Samarinda" class="logo-tengah">
+            <img src="logosugt.png" alt="SUGT" class="logo">
+        </div>
+    </header>
+
+    <div class="quiz-container">
+        <!-- Area Soal -->
+        <div id="quiz-box">
+            <h2 id="question">Pertanyaan akan muncul di sini...</h2>
+            <div id="options" class="options-container">
+                <!-- Pilihan jawaban  -->
+            </div>
+            <div>
+                <button id="back-btn" onclick="konfirmasiKembali()">Kembali</button>
+                <button id="next-btn" onclick="nextQuestion()">Selanjutnya</button>
+            </div>
+        </div>
+
+        <!-- Area Hasil (Sembunyi secara default) -->
+        <div id="result-box" style="display: none;">
+            <h2 style="text-align: center;">Kuis Selesai</h2>
+            <p id="score-text" style="text-align: center;">Skor kamu akan muncul di sini</p>
+            <div style="text-align: center; margin-top: 20px;">
+                <button onclick="restartQuiz()">Ulangi Kuis</button>
+                <button onclick="window.location.href='index.html'">Kembali ke Home</button>
+            </div>
+        </div>
+
+        <script>
+            const quizData = [
+                {
+                    question: "1. Apa prinsip utama dalam Ekonomi Syariah?",
+                    options: ["Riba", "Gharar", "Keadilan & Maslahat", "Maysir"],
+                    answer: 2
+                },
+                {
+                    question: "2. Zakat harta (maal) wajib dikeluarkan jika sudah mencapai...",
+                    options: ["Nisab dan Haul", "Hitungan Bulanan", "Batas Bebas Tax", "Syarat Biasa"],
+                    answer: 0
+                },
+                {
+                    question: "3. Ilmu ekonomi syariah didasarkan pada...",
+                    options: ["Al-Qur'an", "Hadits", "Ijma' dan Qiyas", "Benar Semua"],
+                    answer: 3
+                },
+                {
+                    question: "4. Istilah untuk perolehan keuntungan secara spekulatif tanpa usaha produktif adalah...",
+                    options: ["Riba", "Gharar", "Haram", "Maysir"],
+                    answer: 0
+                },
+                {
+                    question: "5. Makna haram adalah...",
+                    options: ["Diperbolehkan", "Dilarang", "Dianjurkan", "Sebaiknya Ditinggalkan"],
+                    answer: 1
+                },
+
+            ];
+
+            let currentQuestion = 0;
+            let score = 0;
+            let selectedOption = null;
+
+            // Fungsi menampilkan soal & pilihan
+            function loadQuestion() {
+                selectedOption = null;
+                const q = quizData[currentQuestion];
+                document.getElementById("question").innerText = q.question;
+
+                const optionsContainer = document.getElementById("options");
+                optionsContainer.innerHTML = "";
+
+                q.options.forEach((opt, index) => {
+                    const btn = document.createElement("button");
+                    btn.className = "option-btn";
+                    btn.innerText = opt;
+                    btn.onclick = () => selectOption(btn, index);
+                    optionsContainer.appendChild(btn);
+                });
+            }
+
+            // Fungsi menandai pilihan yang diklik user
+            function selectOption(btn, index) {
+                document.querySelectorAll(".option-btn").forEach(b => b.classList.remove("selected"));
+                btn.classList.add("selected");
+                selectedOption = index;
+            }
+
+            // Fungsi pindah ke soal berikutnya
+            function nextQuestion() {
+                if (selectedOption === null) {
+                    alert("Pilih salah satu jawaban terlebih dahulu!");
+                    return;
+                }
+
+                // Tambah skor jika jawaban benar
+                if (selectedOption === quizData[currentQuestion].answer) {
+                    score++;
+                }
+
+                currentQuestion++;
+
+                if (currentQuestion < quizData.length) {
+                    loadQuestion();
+                } else {
+                    showResult();
+                }
+            }
+
+            // Fungsi menampilkan hasil akhir
+            function showResult() {
+                document.getElementById("quiz-box").style.display = "none";
+                document.getElementById("result-box").style.display = "block";
+                document.getElementById("score-text").innerText =
+                    `Skor Kamu: ${score} dari ${quizData.length} Soal!`;
+            }
+
+            // Fungsi restart kuis
+            function restartQuiz() {
+                currentQuestion = 0;
+                score = 0;
+                document.getElementById("quiz-box").style.display = "block";
+                document.getElementById("result-box").style.display = "none";
+                loadQuestion();
+            }
+
+            // Jalankan kuis pertama kali saat halaman dimuat
+            loadQuestion();
+
+            function konfirmasiKembali() {
+                document.getElementById('modal-konfirmasi').classList.add('show');
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                // ... kode DOMContentLoaded kamu yang sudah ada ...
+
+                // Event listener tombol modal
+                const btnYa = document.getElementById('btn-ya');
+                const btnBatal = document.getElementById('btn-batal');
+                const modal = document.getElementById('modal-konfirmasi');
+
+                if (btnYa) {
+                    btnYa.addEventListener('click', function () {
+                        window.location.href = 'index.html';
+                    });
+                }
+
+                if (btnBatal) {
+                    btnBatal.addEventListener('click', function () {
+                        modal.classList.remove('show');
+                    });
+                }
+
+                // Tutup modal kalau klik di luar kotak
+                if (modal) {
+                    modal.addEventListener('click', function (e) {
+                        if (e.target === modal) {
+                            modal.classList.remove('show');
+                        }
+                    });
+                }
+            });
+
+        </script>
+
+    </div>
+    <div id="modal-konfirmasi" class="modal-overlay">
+        <div class="modal-box">
+            <span class="material-symbols-outlined modal-icon">warning</span>
+            <p>Apakah kamu yakin ingin kembali?<br>Progres kuis akan hilang.</p>
+            <div class="modal-buttons">
+                <button id="btn-ya" class="btn-ya">Ya, Kembali</button>
+                <button id="btn-batal" class="btn-batal">Batal</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+</html>

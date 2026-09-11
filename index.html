@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EKSYAH.ID - Home</title>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+</head>
+
+<body>
+    <header class="navbar">
+
+        <a href="index.html">
+            <img src="EKSYAH-LOGO.png" alt="logo-eksyah" class="logo-ngiri">
+        </a>
+        <a href="index.html" class="headline" style="text-decoration: none; text-align: left;">EKSYAH.ID</a>
+
+        <div>
+            <a href="https://sman10samarinda.sch.id/html/">
+                <img src="smaridasa.png" alt="SMAN 10 Samarinda" class="logo-tengah">
+            </a>
+            <a href="https://smaunggulgaruda.id/">
+                <img src="logosugt.png" alt="SUGT" class="logo">
+            </a>
+        </div>
+
+    </header>
+
+    <main>
+        <section class="front-page banner-foto rising-mahal">
+            <div class="box">
+                <h2 class="web-profile section-customized">EKSYAH.ID</h2>
+                <h3>Belajar Ilmu Ekonomi Syariah</h3>
+                <button onclick="window.location.href='about.html'" class="btn-about" id="profileBtn">About Us
+                    &ensp;<span class="material-symbols-outlined">contacts_product</span></button>
+            </div>
+        </section>
+
+
+        <!-- Tutorial Materi Pelajaran -->
+        <section class="web-info1">
+            <h2 class="web-profile">Dasar Ekonomi Syariah</h2>
+            <p class="paragraph-info"><strong>Ekonomi Syariah</strong> adalah ilmu yang mempelajari perilaku ekonomi
+                manusia yang
+                diatur berdasarkan aturan agama Islam dan didasari dengan tauhid sebagaimana dirangkum dalam
+                rukun iman dan rukun Islam.
+            </p>
+            <a href="dasarEKSYAH.html" class="btn-info">Pelajari Lebih Lanjut<span
+                    class="material-symbols-outlined">arrow_outward</span>
+            </a>
+        </section>
+
+        <section class="web-info2 banner-foto2">
+            <h3 class="info2-h3">Prinsip Dasar Ekonomi Syariah</h3>
+            <p class="info2-p">Dalam penerapannya, ekonomi syariah memiliki prinsip-prinsip utama yang membedakannya
+                dari sistem
+                ekonomi konvensional:</p>
+            <ul class="paragraph-list">
+                <li><strong>Pelarangan Riba:</strong> Tidak diperbolehkan adanya tambahan (bunga) yang
+                    diisyaratkan dalam transaksi pinjam-meminjam.</li>
+                <li><strong>Keadilan dan Keseimbangan:</strong> Mengutamakan keadilan bagi semua pihak yang
+                    bertransaksi dengan menghindari <em>Gharar</em> (ketidakjelasan) dan <em>Maysir</em> (perjudian).
+                </li>
+                <li><strong>Transaksi Halal:</strong> Objek yang ditransaksikan haruslah barang atau jasa yang
+                    dihalalkan.</li>
+                <li><strong>Zakat:</strong> Instrumen wajib untuk mendistribusikan kekayaan dan membantu pihak
+                    yang membutuhkan agar harta tidak menumpuk di satu pihak.</li>
+            </ul>
+        </section>
+
+        <section id="materi" class="card-section">
+            <h3 class="web-profile">Perbandingan dengan Ekonomi Konvensional</h3>
+            <table border="1" cellpadding="10" cellspacing="0"
+                style="border-collapse: collapse; width: 100%; text-align: left;">
+                <thead>
+                    <tr>
+                        <th>Aspek</th>
+                        <th>Ekonomi Syariah</th>
+                        <th>Ekonomi Konvensional</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Sistem Keuntungan</strong></td>
+                        <td>Bagi hasil (Nisbah)</td>
+                        <td>Sistem Bunga (Interest)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prinsip Utama</strong></td>
+                        <td>Berdasarkan Al-Qur'an dan Hadis</td>
+                        <td>Berdasarkan rasionalitas dan hukum pasar</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tujuan Akhir</strong></td>
+                        <td>Kesejahteraan dunia dan akhirat (Falah)</td>
+                        <td>Keuntungan materi dan kepuasan maksimal</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <!-- Simulasi Interaktif -->
+        <section id="interaktif" class="interaktif">
+            <h2 class="web-profile">Kalkulator Zakat Harta (Maal)</h2>
+            <p class="paragraph-info">Zakat adalah instrumen penting dalam ekonomi syariah. Jika hartamu selama setahun
+                telah mencapai
+                <em>Nisab</em> (batas minimal penghasilan per tahun, diasumsikan setara 85 gram emas atau sekitar Rp
+                91.681.728), maka
+                wajib dikeluarkan zakat sebesar 2,5%.
+            </p>
+
+            <div class="form-group">
+                <label for="totalHarta">Total Harta Simpanan (Rp):</label>
+                <input type="number" id="totalHarta" placeholder="Contoh: 100000000">
+            </div>
+
+            <div class="buttonStyle">
+                <button onclick="hitungZakat()">Hitung Zakat</button>
+            </div>
+
+            <!-- Tempat hasil simulasi -->
+            <div id="hasil-simulasi"></div>
+        </section>
+
+        <section class="web-info2 banner-foto2">
+            <div>
+                <h2 class="web-quiz" style="color: white; justify-content: center;">
+                    Mari kita uji pemahamanmu tentang Ekonomi Syariah melalui kuis interaktif ini!
+                </h2>
+                <p class="info2-p" style="color: white; justify-content: center;">Quiz Simpel untuk Menguji Kemampuanmu!
+                </p>
+                <a href="QUIZ.html" class="QUIZ" id="QUIZ"
+                    style="display: flex; justify-content: center; align-items: center;">
+                    PLAY QUIZ
+                </a>
+            </div>
+        </section>
+
+
+    </main>
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <section class="main-footer">
+        <p>&copy; Nama EKSYAH Dibuat Atas Khayalan Fiktif. Apabila terdapat kesamaan nama, hal tersebut murni tidak
+            disengaja.</p>
+    </section>
+</body>
+
+</html>
